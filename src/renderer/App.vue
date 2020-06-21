@@ -1,17 +1,12 @@
 <template>
   <div id="app">
-    <landing-page></landing-page>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import LandingPage from '@/components/LandingPage'
-
   export default {
-    name: 'test1',
-    components: {
-      LandingPage
-    }
+    name: 'electron_vue'
   }
 </script>
 

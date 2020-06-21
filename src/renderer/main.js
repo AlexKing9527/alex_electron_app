@@ -1,22 +1,18 @@
 import Vue from 'vue'
-<<<<<<< HEAD
-import ElementUI from 'element-ui'
-=======
->>>>>>> 86e8b436634a8d6a5e728c75808919e7971a556b
 import axios from 'axios'
 
 import App from './App'
+import router from './router'
+import store from './store'
 
-<<<<<<< HEAD
-Vue.use(ElementUI)
-
-=======
->>>>>>> 86e8b436634a8d6a5e728c75808919e7971a556b
+if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   components: { App },
+  router,
+  store,
   template: '<App/>'
 }).$mount('#app')

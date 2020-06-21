@@ -1,29 +1,5 @@
 <template>
   <div id="wrapper">
-<<<<<<< HEAD
-    <!-- <img id="logo" src="~@/assets/logo.png" alt="electron-vue">   -->
-    <main>
-      <div class="left-side">
-        <span class="title">
-          <el-input v-model="data1"></el-input>{{data1}}
-        </span>
-        <system-information></system-information>
-        <div class="right-side">
-          <div class="doc">
-            <div class="title">Getting Started</div>
-            <p>
-              electron-vue comes packed with detailed documentation that covers everything from
-              internal configurations, using the project structure, building your application,
-              and so much more.
-            </p>
-            <button @click="open('https://simulatedgreg.gitbooks.io/electron-vue/content/')">Read the Docs</button><br><br>
-          </div>
-          <div class="doc">
-            <div class="title alt">Other Documentation</div>
-            <button class="alt" @click="open('https://electron.atom.io/docs/')">Electron</button>
-            <button class="alt" @click="open('https://vuejs.org/v2/guide/')">Vue.js</button>
-          </div>
-=======
     <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
     <main>
       <div class="left-side">
@@ -47,7 +23,6 @@
           <div class="title alt">Other Documentation</div>
           <button class="alt" @click="open('https://electron.atom.io/docs/')">Electron</button>
           <button class="alt" @click="open('https://vuejs.org/v2/guide/')">Vue.js</button>
->>>>>>> 86e8b436634a8d6a5e728c75808919e7971a556b
         </div>
       </div>
     </main>
@@ -56,37 +31,14 @@
 
 <script>
   import SystemInformation from './LandingPage/SystemInformation'
-<<<<<<< HEAD
-  import api from '../api'
-=======
->>>>>>> 86e8b436634a8d6a5e728c75808919e7971a556b
 
   export default {
     name: 'landing-page',
     components: { SystemInformation },
-<<<<<<< HEAD
-    data () {
-      return {
-        data1: ''
-      }
-    },
     methods: {
       open (link) {
-        require('electron').shell.openExternal(link)
-      },
-      async getData () {
-        let res = await api.getTopBannerData()
-        console.log(res.data)
+        this.$electron.shell.openExternal(link)
       }
-    },
-    created () {
-      this.getData()
-=======
-    methods: {
-      open (link) {
-        require('electron').shell.openExternal(link)
-      }
->>>>>>> 86e8b436634a8d6a5e728c75808919e7971a556b
     }
   }
 </script>
