@@ -50,9 +50,12 @@ function createWindow () {
   app.listen(2999);
 
   mainWindow = new BrowserWindow({
-    height: 563,
+    height: 800,
     useContentSize: true,
-    width: 1000
+    frame: false,
+    resizable: false,
+    skipTaskbar: false,
+    width: 1200
   })
 
   mainWindow.loadURL(winURL)
