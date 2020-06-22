@@ -32,3 +32,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 ```
 
+koa
+```
+npm install koa-static koa-static-cache koa-router --save
+```
+

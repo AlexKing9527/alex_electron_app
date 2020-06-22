@@ -1,4 +1,8 @@
-import { app, BrowserWindow } from 'electron'
+import { 
+  app, 
+  BrowserWindow,
+  ipcMain
+} from 'electron'
 
 /**
  * Set `__static` path to static files in production
@@ -14,9 +18,37 @@ const winURL = process.env.NODE_ENV === 'development'
   : `file://${__dirname}/index.html`
 
 function createWindow () {
-  /**
-   * Initial window options
-   */
+  const Koa = require('koa')
+  const app = new Koa()
+  const path = require('path')
+  const staticCache = require("koa-static-cache");
+  const serve = require("koa-static")
+  const router = require("koa-router")
+  let child_router = require('./router/index.js')
+
+
+  app.use(async (ctx, next)=> {
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+    ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    if (ctx.method == 'OPTIONS') {
+      ctx.body = 200; 
+    } else {
+      await next();
+    }
+  });
+
+  app.use(staticCache(path.join(__dirname, "public"), {
+    maxAge: 365 * 24 * 60 * 60  //Add these files to caches for a year
+  }))
+
+  app.use(serve(path.join(__dirname, "public")))
+
+  router.use('/', child_router);
+  app.use(router.routes()).use(router.allowedMethods());
+
+  app.listen(2999);
+
   mainWindow = new BrowserWindow({
     height: 563,
     useContentSize: true,
@@ -43,6 +75,15 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+ipcMain.on('close',e=>{
+  mainWindow.close()
+})
+ipcMain.on('minimize',e=>{
+  mainWindow.minimize()
+})
+
+
 
 /**
  * Auto Updater
