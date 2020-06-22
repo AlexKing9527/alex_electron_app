@@ -16,7 +16,19 @@ npm run build
 
 
 ```
+npm install -g vue-cli
+vue init simulatedgreg/electron-vue my-project
+cd my-project
+npm install
+npm i element-ui -S
+npm run dev
+```
 
----
+main.js
+```
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+Vue.use(ElementUI)
+```
+
