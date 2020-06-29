@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "crypto-js": "^4.0.0",
     "element-ui": "^2.13.2",
     "koa": "^2.13.0",
     "koa-router": "^9.0.1",
