@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "crypto-js": "^4.0.0",
     "element-ui": "^2.13.2",
     "koa": "^2.13.0",

@@ -23,7 +23,7 @@ function createWindow () {
   const path = require('path')
   const staticCache = require("koa-static-cache");
   const serve = require("koa-static")
-  const router = require("koa-router")
+  const router = require("koa-router")()
   let child_router = require('./router/index.js')
 
 
@@ -44,7 +44,7 @@ function createWindow () {
 
   app.use(serve(path.join(__dirname, "public")))
 
-  router.use('/', child_router);
+  router.use('/api', child_router);
   app.use(router.routes()).use(router.allowedMethods());
 
   app.listen(2999);
@@ -52,9 +52,9 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     height: 800,
     useContentSize: true,
-    frame: false,
-    resizable: false,
-    skipTaskbar: false,
+    // frame: false,
+    // resizable: false,
+    // skipTaskbar: false,
     width: 1200
   })
 
