@@ -1,4 +1,6 @@
-import {encrypt} from './index.js'
+import {
+  encrypt
+} from './index.js'
 const request = require('request')
 
 request.debug = false;
@@ -29,7 +31,7 @@ function randomUserAgent() {
   return userAgentList[num];
 }
 
-function sendApiRequest (
+function sendApiRequest(
   host,
   path,
   method,
@@ -53,8 +55,8 @@ function sendApiRequest (
       "Accept-Language": "zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4",
       Connection: "keep-alive",
       "Content-Type": "application/x-www-form-urlencoded",
-      Referer: "http://music.163.com",
-      Host: "music.163.com",
+      // Referer: "http://music.163.com",
+      // Host: "music.163.com",
       Cookie: cookie,
       "User-Agent": randomUserAgent()
     },
@@ -82,5 +84,32 @@ function sendApiRequest (
       }
       callback(body, cookie);
     }
+  });
+}
+
+function createRequest(path, method, data) {
+  return new Promise((resolve, reject) => {
+    const options = {
+      url: `http://music.163.com${path}`,
+      method: method,
+      headers: {
+        Referer: "http://music.163.com",
+        Cookie: "appver=1.5.2",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "User-Agent": randomUserAgent()
+      }
+    };
+
+    if (method.toLowerCase() === "post") {
+      options.body = data;
+    }
+
+    request(options, function(error, res, body) {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(body);
+      }
+    });
   });
 }
